@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BienResource\Pages;
-use App\Filament\Resources\BienResource\RelationManagers;
-use App\Models\Bien;
+use App\Filament\Resources\CategorieResource\Pages;
+use App\Filament\Resources\CategorieResource\RelationManagers;
+use App\Models\Categorie;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BienResource extends Resource
+class CategorieResource extends Resource
 {
-    protected static ?string $model = Bien::class;
+    protected static ?string $model = Categorie::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -24,13 +24,6 @@ class BienResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(60),
-                Forms\Components\TextInput::make('description'),
-                    
-                Forms\Components\TextInput::make('price'),
-                
-                Forms\Components\TextInput::make('city')
             ]);
     }
 
@@ -39,12 +32,7 @@ class BienResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('description'),
-            
-                Tables\Columns\TextColumn::make('price')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('city')
+                    ->searchable()
             ])
             ->filters([
                 //
@@ -69,9 +57,9 @@ class BienResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBiens::route('/'),
-            'create' => Pages\CreateBien::route('/create'),
-            'edit' => Pages\EditBien::route('/{record}/edit'),
+            'index' => Pages\ListCategories::route('/'),
+            'create' => Pages\CreateCategorie::route('/create'),
+            'edit' => Pages\EditCategorie::route('/{record}/edit'),
         ];
     }
 }
